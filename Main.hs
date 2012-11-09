@@ -7,7 +7,6 @@ import System.Console.CmdArgs hiding (opt)
 import Data.Typeable ()
 import Control.Monad.IO.Class (liftIO, MonadIO)
 import Control.Monad.Trans.Class (lift)
-import Control.Monad.Trans.Control (MonadBaseControl)
 import Control.Applicative
 import Safe (headMay)
 import Data.Conduit
@@ -63,7 +62,7 @@ createNewVolume size = do
 
 waitForVolume
     :: (MonadResource m, MonadBaseControl IO m)
-    => VolumeStatus
+    => VolumeState
     -> Text
     -> EC2 m Volume
 waitForVolume st = EU.wait
